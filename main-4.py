@@ -1,23 +1,25 @@
-import heapq
-import os
 
-# Read input values
-n, m = map(int, input().split())
-jobs = list(map(int, input().split()))
+import heapq     
 
-# Initialize variables
-threads = [(0, i) for i in range(n)]
-start_times = [0] * m
-heapq.heapify(threads)
+o, r = map ( int, input().split () )
 
-# Process jobs
-for i in range(m):
-    time, thread = heapq.heappop(threads)
-    start_times[i] = time
-    heapq.heappush(threads, (time + jobs[i], thread))
+t = list(map(int, input().split()  ) )
 
-# Output results
-output = '\n'.join([f"{i} {start_times[i]}" for i in range(m)])
-with open(os.environ['OUTPUT_PATH'], 'w') as f:
-    f.write(output)
+threads = [(0, n) for n in range(o)] 
 
+heapq.heapify (  threads)
+
+for n in range  (r):
+
+  
+    darb= t[n]
+  
+    laiks, index = heapq.heappop(threads)
+  
+    sākas = laiks
+  
+    laiks += darb
+  
+    print(index, sākas  )
+  
+    heapq.heappush(threads, (  laiks, index))
