@@ -1,25 +1,18 @@
+import heapq
 
-import heapq     
 
-o, r = map ( int, input().split () )
+n, m = map(int, input().split())
+job_times = list(map(int, input().split()))
 
-t = list(map(int, input().split()  ) )
 
-threads = [(0, n) for n in range(o)] 
+start_times = [0] * m
+thread_heap = [(0, i) for i in range(n)]  
+for i, job_time in enumerate(job_times):
+    finish_time, thread_idx = heapq.heappop(thread_heap)
+    start_times[i] = finish_time
+    heapq.heappush(thread_heap, (finish_time + job_time, thread_idx))
 
-heapq.heapify (  threads)
 
-for n in range  (r):
+for i, start_time in enumerate(start_times):
+    print(i, start_time)
 
-  
-    darb= t[n]
-  
-    laiks, index = heapq.heappop(threads)
-  
-    sākas = laiks
-  
-    laiks += darb
-  
-    print(index, sākas  )
-  
-    heapq.heappush(threads, (  laiks, index))
