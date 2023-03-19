@@ -1,25 +1,29 @@
+def process_jobs():
+    
+    thread_times = [0] * n_threads
+    job_start_times = []
 
-import heapq     
+    for job_duration in jobs:
+        
+        thread_index = thread_times.index(min(thread_times))
 
-o, r = map ( int, input().split () )
+       
+        job_start_times.append((thread_index, thread_times[thread_index]))
 
-t = list(map(int, input().split()  ) )
+       
+        thread_times[thread_index] += job_duration
 
-threads = [(0, n) for n in range(o)] 
+    assert n_jobs == len(job_start_times)
 
-heapq.heapify (  threads)
+    
+    for thread_num, starts_at in job_start_times:
+        print(f"{thread_num} {starts_at}")
 
-for n in range  (r):
+# Get input from user
+num_threads, num_jobs = input().split()
+n_threads = int(num_threads)
+n_jobs = int(num_jobs)
+jobs = list(map(int, input().split()))
 
-  
-    darb= t[n]
-  
-    laiks, index = heapq.heappop(threads)
-  
-    sākas = laiks
-  
-    laiks += darb
-  
-    print(index, sākas  )
-  
-    heapq.heappush(threads, (  laiks, index))
+# Process jobs and print output
+process_jobs()
