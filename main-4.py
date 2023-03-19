@@ -1,5 +1,5 @@
 def process_jobs():
-    #
+    # Allocate jobs to threads 
     thread_times = [0] * n_threads
     job_start_times = []
 
@@ -17,14 +17,13 @@ def process_jobs():
 
     # Print the thread numbers and job start times
     for thread_num, starts_at in job_start_times:
-        print(f"Thread {thread_num} starts job at {starts_at} seconds")
+        print(f"{thread_num} {starts_at}")
 
 # Get input from user
-num_threads, num_jobs = input("Enter number of threads and jobs: ").split()
-n_threads = int(num_threads)
-n_jobs = int(num_jobs)
-jobs = list(map(int, input("Enter job durations: ").split()))
+n_threads, n_jobs = map(int, input().split())
+jobs = list(map(int, input().split()))
 
 # Process jobs and print output
 process_jobs()
+
 
