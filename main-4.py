@@ -1,18 +1,23 @@
 import heapq
+import os
 
-# Take input from the user
+# Read input values
 n, m = map(int, input().split())
-job_times = list(map(int, input().split()))
+jobs = list(map(int, input().split()))
 
-# Assign jobs to threads
-start_times = [None] * m
-thread_heap = [(0, i) for i in range(n)]  # (finish time, thread index) heap
+# Initialize variables
+threads = [(0, i) for i in range(n)]
+start_times = [0] * m
+heapq.heapify(threads)
+
+# Process jobs
 for i in range(m):
-    job_time = job_times[i]
-    finish_time, thread_idx = heapq.heappop(thread_heap)
-    start_times[i] = (thread_idx, finish_time)
-    heapq.heappush(thread_heap, (finish_time + job_time, thread_idx))
+    time, thread = heapq.heappop(threads)
+    start_times[i] = time
+    heapq.heappush(threads, (time + jobs[i], thread))
 
-# Print output
-for thread_idx, start_time in start_times:
-    print(thread_idx, start_time)
+# Output results
+output = '\n'.join([f"{i} {start_times[i]}" for i in range(m)])
+with open(os.environ['OUTPUT_PATH'], 'w') as f:
+    f.write(output)
+
